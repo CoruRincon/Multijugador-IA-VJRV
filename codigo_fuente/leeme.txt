@@ -1,0 +1,2 @@
+una vez iniciado el servidor en un equipo con node servidor.js podemos desde el navegador de ese equipo poner localhost:8090 yabrir varias pestañas para comprobar su funcionamiento.
+también podemos copiar index.html en otro equipo y modificar la url para que en vez de conectarse a localhost:8090 se conecte a la IP:8090 del equipo que ejecuta el servidor.

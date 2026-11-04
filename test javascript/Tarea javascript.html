@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script language="javascript">
+            window.addEventListener("keydown", checkKeyPressed);
+            function checkKeyPressed(e) 
+            {
+                document.getElementById("key").innerHTML = e.keyCode;
+            }
+        </script>
+    </head>
+    <body>
+        <p id="key"></p>
+        <canvas id="mainCanvas" width="650" height="406">
+            <script type="text/javascript">
+                var c = document.getElementById("mainCanvas");
+                var ctx = c.getContext("2d");
+                
+                var bg = new Image(); bg.src = "bg.jpg";
+                var player = new Image(); player.src = "bomb.png";
+
+                var p = 5, step = 2, x = Math.random(1)*356;
+
+                function draw()
+                {
+                    ctx.drawImage(bg, x, p-step, 44, 51,x, p,step, 44, 51);
+                    ctx.drawImage(player, 0, 0, 44, 51, x, p, 44, 51);
+                    p+=step;
+                    if(p>406) {
+                        p=0;
+                        x=Math.random(1)*(650-44);
+                    }
+                }
+
+                window.onload = function()
+                {
+                    ctx.drawImage(bg, 0, 0, 650, 406, 0, 0, 650, 406);
+                    setInterval(draw, 10);
+                }
+            </script>
+        </canvas>
+    </body>
+</html>

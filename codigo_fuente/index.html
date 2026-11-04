@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo WebSocket</title>
+  <style>
+    body { font-family: sans-serif; }
+    #log { border: 1px solid #aaa; height: 200px; overflow-y: scroll; padding: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Cliente WebSocket</h2>
+  <input id="msg" placeholder="Escribe un mensaje">
+  <button onclick="enviar()">Enviar</button>
+  <div id="log"></div>
+
+  <script>
+    const ws = new WebSocket("ws://192.168.211.27:8090");
+
+    const log = document.getElementById("log");  
+
+    ws.onopen = () => log.innerHTML += "<div>Conectado al servidor</div>";
+    ws.onmessage = (event) => log.innerHTML += "<div><b>Mensaje de:</b> " + processData(event.data).Player + " <br> " + processData(event.data).msg + "</div>";
+    ws.onclose = () => log.innerHTML += "<div>Conexión cerrada</div>";
+
+    function enviar() {
+      const input = document.getElementById("msg");
+      ws.send(input.value);
+      input.value = "";
+    }
+
+    function processData(inputData){
+        return JSON.parse(inputData);
+    }
+  </script>
+</body>
+</html>
